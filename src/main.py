@@ -45,7 +45,7 @@ def run(env):
         clients = get_clients(session)
         for client in clients:
             log.info("Queuing user (%s)" % client.username)
-            send_message(json.dumps(client.to_dict()), conf["sqs"]["name"], conf["sqs"]["region"], username=client.username)
+            send_message(json.dumps(client.to_dict()["websites"]), conf["sqs"]["name"], conf["sqs"]["region"], username=client.username, email=client.email)
         # Close DB Connection
         session.close()
 
