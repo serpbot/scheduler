@@ -5,6 +5,7 @@ import sys
 import logging.config
 import argparse
 import configparser
+import json
 
 from src.lib.aws import send_message
 from src.lib.db import get_db_session, get_clients
@@ -43,8 +44,8 @@ def run(env):
         session = get_db_session(conf)
         clients = get_clients(session)
         for client in clients:
-            print("Client: %s" + client.username)
-            send_message(client, conf["sqs"]["name"], conf["sqs"]["region"], username=client.username)
+            log.info("Queuing user (%s)" % client.username)
+            send_message(json.dumps(client.to_dict()), conf["sqs"]["name"], conf["sqs"]["region"], username=client.username)
         # Close DB Connection
         session.close()
 
