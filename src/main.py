@@ -7,6 +7,7 @@ import argparse
 import configparser
 import json
 
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)) + "/..")
 from src.lib.aws import send_message
 from src.lib.db import get_db_session, get_clients
 
