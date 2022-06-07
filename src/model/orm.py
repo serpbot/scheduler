@@ -1,6 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 
 base = declarative_base()
@@ -11,6 +11,7 @@ class Client(base, SerializerMixin):
     __tablename__ = "clients"
     username = Column(String(255), primary_key=True)
     email = Column(String(255), nullable=False)
+    notifications = Column(Boolean, default=False)
 
     websites = relationship("Website")
 
