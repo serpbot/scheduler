@@ -20,7 +20,7 @@ def run():
         clients = get_clients(session)
         for client in clients:
             log.info("Queuing user (%s)" % client.username)
-            send_message(json.dumps(client.to_dict()["websites"]), username=client.username, email=client.email)
+            send_message(json.dumps(client.to_dict()["websites"]), username=client.username, email=client.email, notifications=client.notifications)
         # Close DB Connection
         session.close()
 
